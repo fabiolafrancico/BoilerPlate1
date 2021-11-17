@@ -11,8 +11,23 @@ import  webpack from 'webpack';
 import WebpackDevMiddleware from 'webpack-dev-middleware';
 import WebpackHotMiddleware from 'webpack-hot-middleware';
 import  webpackConfig  from '../webpack.dev.config';
-
+const env = process.env.NODE_ENV || 'development';
 var app = express();
+if(env ==='development'){
+  console.log('>Excecuting in Development Mode: webpack Hot Reloading');
+
+webpackConfig.entry =['webpack-hot-middleware/client?reload=true&timeout=1000', webpackConfig.entry];
+webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin);
+
+const compiler = webpack(webpackConfig);
+
+app.use(WebpackDevMiddleware(compiler,{
+  publicPath: webpackConfig.output.publicPath
+}));
+app.use (WebpackHotMiddleware(compiler));
+}else{
+console.log ('>Executing in production Mode ..');
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
