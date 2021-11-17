@@ -1,7 +1,10 @@
 {
     "parser": "babel-eslint",
     "extends": ["eslint:recommended"],
-"rules": {},
+    "plugins": ["prettier"],
+"rules": {
+    "prettier/prettier": ["error"]
+},
 "env":{
     "browser": true,
     "es6": true,
