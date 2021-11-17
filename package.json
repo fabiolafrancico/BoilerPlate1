@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node .server/bin/www",
     "w:s": "babel-watch  ./server/bin/www",
-    "clean" : "rimraf dist-server"
+    "clean" : "rimraf dist-server",
+    "b:s" : "npm run clean && babel ./server --out-dir dist-server --copy-files" 
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
