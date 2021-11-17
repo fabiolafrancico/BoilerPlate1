@@ -4,8 +4,13 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import  indexRouter from './routes/index';
-import usersRouter from './routes/users';
+import indexRouter from '@s-routes/index';
+import usersRouter from '@s-routes/users';
+
+import  webpack from 'webpack';
+import WebpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+import  webpackConfig  from '../webpack.dev.config';
 
 var app = express();
 
@@ -17,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..','public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
